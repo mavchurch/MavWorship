@@ -4,6 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#111111">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icones/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="MAV WORSHIP">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
 <title>MAV WORSHIP</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%22-8%20-60%20228%20228%22%3E%3Crect%20x%3D%22-8%22%20y%3D%22-60%22%20width%3D%22228%22%20height%3D%22228%22%20rx%3D%2240%22%20fill%3D%22%23111%22/%3E%3Cg%20fill%3D%22%23fff%22%20stroke%3D%22%23fff%22%20stroke-width%3D%223%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%221.5%22%20y%3D%2249.5%22%20width%3D%2243%22%20height%3D%2245%22%20rx%3D%222%22/%3E%3Cpolygon%20points%3D%2248.5%2C1.5%20125.5%2C46.5%20125.5%2C94.5%2048.5%2C49.5%22/%3E%3Cpolygon%20points%3D%22130.5%2C1.5%20209.5%2C48.5%20209.5%2C94.5%20130.5%2C48.5%22/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -999,6 +1005,11 @@ async function mostrarImagem(folha, nome) {
   // depois de correr a faixa, o dedo solto não conta como toque num item
   document.addEventListener('click', ev => { if (Date.now() < bloquearClique && ev.target.closest && ev.target.closest(SEL)) { ev.preventDefault(); ev.stopPropagation(); } }, true);
 })();
+
+/* App instalável (GitHub Pages): registra o sw.js para o celular oferecer "Instalar app" */
+if ('serviceWorker' in navigator && location.protocol === 'https:' && !/script\.google|googleusercontent/.test(location.host) && !window.__DEMO__) {
+  window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js').catch(() => {}); });
+}
 
 /* ======================== Estrutura e rotas ======================== */
 const LOGO = '<span class="logo" aria-hidden="true"><svg viewBox="0 0 212 96"><g fill="currentColor" stroke="currentColor" stroke-width="3" stroke-linejoin="round"><rect x="1.5" y="49.5" width="43" height="45" rx="2"/><polygon points="48.5,1.5 125.5,46.5 125.5,94.5 48.5,49.5"/><polygon points="130.5,1.5 209.5,48.5 209.5,94.5 130.5,48.5"/></g></svg></span>';
